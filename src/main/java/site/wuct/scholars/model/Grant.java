@@ -2,7 +2,7 @@ package site.wuct.scholars.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "grant")
+@Table(name = "grants")
 public class Grant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,6 +17,4 @@ public class Grant {
     @ManyToOne
     @JoinColumn(name = "recipient_id", nullable = false)
     private Scholar recipient;
-
-    // Constructors, getters, and setters
 }

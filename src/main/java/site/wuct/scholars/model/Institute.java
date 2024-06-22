@@ -18,6 +18,4 @@ public class Institute {
 
     @OneToMany(mappedBy = "institute")
     private Set<Scholar> people;
-
-    // Constructors, getters, and setters
 }

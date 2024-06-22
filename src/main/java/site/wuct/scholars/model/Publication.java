@@ -18,6 +18,4 @@ public class Publication {
     @ManyToOne
     @JoinColumn(name = "author_id", nullable = false)
     private Scholar author;
-
-    // Constructors, getters, and setters
 }
