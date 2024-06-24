@@ -12,7 +12,6 @@ make sure that you have configured [Java](https://www.java.com/en/) and [Maven](
 mvn compile
 ```
 
-
 2. run the project
 
 ```bash
