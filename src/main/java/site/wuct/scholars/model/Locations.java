@@ -3,14 +3,13 @@ package site.wuct.scholars.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "location")
-public class Location {
+@Table(name = "locations")
+public class Locations {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer locid;
 
-    @Column(name = "loc_name")
-    private String locName;
+    @Column(name = "location")
+    private String location;
 
     @Column(name = "city")
     private String city;
@@ -21,3 +20,6 @@ public class Location {
     @Column(name = "country")
     private String country;
 }
+
+
+// locid,location,city,state,country

@@ -6,12 +6,14 @@ import javax.persistence.*;
 @Table(name = "publication")
 public class Publication {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer pubid;
+    private Long pubid;
 
     @Column(name = "pmid")
     private String pmid;
 
     @Column(name = "doi")
     private String doi; 
+
+    @Column(name = "pid")
+    private Integer pid;
 }

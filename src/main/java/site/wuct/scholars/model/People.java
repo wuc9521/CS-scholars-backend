@@ -3,18 +3,21 @@ package site.wuct.scholars.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "person")
-public class Person {
+@Table(name = "people")
+public class People {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "pid")
     private Integer pid; 
 
     @Column(name = "name")
     private String name; 
 
-    @Column(name = "major")
-    private String major;
+    @Column(name = "majorarea")
+    private String majorarea;
 
     @Column(name = "hindex")
     private Integer hindex; 
+
+    @Column(name = "locid")
+    private Integer locid;
 }
