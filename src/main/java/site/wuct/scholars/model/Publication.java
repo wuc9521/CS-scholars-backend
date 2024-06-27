@@ -7,15 +7,11 @@ import javax.persistence.*;
 public class Publication {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer pubid;
 
-    @Column(name = "title")
-    private String title;
+    @Column(name = "pmid")
+    private String pmid;
 
-    @Column(name = "year_published")
-    private Integer yearPublished;
-
-    @ManyToOne
-    @JoinColumn(name = "author_id", nullable = false)
-    private Scholar author;
+    @Column(name = "doi")
+    private String doi; 
 }

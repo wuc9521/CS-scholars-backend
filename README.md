@@ -4,21 +4,19 @@ Backend for CS564 project in UW-Madison
 
 ## quick start
 
-make sure that you have configured [Java](https://www.java.com/en/) and [Maven](https://maven.apache.org/) environment.
+make sure that you have configured [Java](https://www.java.com/en/), [Docker](https://docker.com) and [Maven](https://maven.apache.org/) environment.
 
-1. compile the project
 
-```bash
-mvn compile
-```
 
-2. run the project
+1. run the project
 
 ```bash
-mvn exec:java
+docker compose up -d # start the database
+mvn compile     # compile the project
+mvn exec:java   # run the project
 ```
 
-3. run tests
+2. run the test
 
 ```bash
 mvn test
