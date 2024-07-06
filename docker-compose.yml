@@ -2,7 +2,7 @@ version: '3.1'
 
 services:
   db:
-    image: wuchentian/csscholars-db
+    image: wuchentian/csscholars-db:latest
     restart: always
     environment:
       POSTGRES_DB: csscholars
