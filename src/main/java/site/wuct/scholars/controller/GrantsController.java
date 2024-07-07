@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/locations")
+@RequestMapping("/api/grants")
 @CrossOrigin
-public class LocationsController {
+public class GrantsController {
     
 }
