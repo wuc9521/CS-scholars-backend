@@ -3,7 +3,7 @@ package site.wuct.scholars.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "publication")
+@Table(name = "publications")
 public class Publication {
     @Id
     private Long pubid;
@@ -13,7 +13,4 @@ public class Publication {
 
     @Column(name = "doi")
     private String doi; 
-
-    @Column(name = "pid")
-    private Integer pid;
 }

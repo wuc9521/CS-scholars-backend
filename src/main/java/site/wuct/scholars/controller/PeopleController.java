@@ -1,6 +1,6 @@
 package site.wuct.scholars.controller;
 
-import site.wuct.scholars.model.People;
+import site.wuct.scholars.model.Person;
 import site.wuct.scholars.service.PeopleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,18 +17,18 @@ public class PeopleController {
     private PeopleService PeopleService;
 
     @GetMapping
-    public List<People> getAllPeople() {
+    public List<Person> getAllPeople() {
         return PeopleService.findAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<People> getPeopleById(@PathVariable Long id) {
-        People People = PeopleService.findById(id);
+    public ResponseEntity<Person> getPeopleById(@PathVariable Long id) {
+        Person People = PeopleService.findById(id);
         return People != null ? ResponseEntity.ok(People) : ResponseEntity.notFound().build();
     }
 
     @PostMapping
-    public People createPeople(@RequestBody People People) {
+    public Person createPeople(@RequestBody Person People) {
         return PeopleService.save(People);
     }
 

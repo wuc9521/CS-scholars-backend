@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "people")
-public class People {
+public class Person {
     @Id
     @Column(name = "pid")
     private Integer pid; 
@@ -12,12 +12,9 @@ public class People {
     @Column(name = "name")
     private String name; 
 
-    @Column(name = "majorarea")
+    @Column(name = "major")
     private String majorarea;
 
     @Column(name = "hindex")
     private Integer hindex; 
-
-    @Column(name = "locid")
-    private Integer locid;
 }

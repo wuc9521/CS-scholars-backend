@@ -4,12 +4,12 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "locations")
-public class Locations {
+public class Location {
     @Id
     private Integer locid;
 
-    @Column(name = "location")
-    private String location;
+    @Column(name = "loc_name")
+    private String locName;
 
     @Column(name = "city")
     private String city;

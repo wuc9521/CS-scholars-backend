@@ -4,7 +4,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "grants")
-public class Grants {
+public class Grant {
     @Id
     private Long grantid;
 

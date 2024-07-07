@@ -1,13 +1,13 @@
 package site.wuct.scholars.service;
 
-import site.wuct.scholars.model.People;
+import site.wuct.scholars.model.Person;
 
 import java.util.List;
 
 public interface PeopleService {
-    List<People> findAll();
-    People findById(Long id);
-    People save(People People);
+    List<Person> findAll();
+    Person findById(Long id);
+    Person save(Person People);
     void deleteById(Long id);
 }
 

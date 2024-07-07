@@ -3,7 +3,7 @@ package site.wuct.scholars.service.impl;
 import site.wuct.scholars.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import site.wuct.scholars.model.People;
+import site.wuct.scholars.model.Person;
 import site.wuct.scholars.service.PeopleService;
 
 import java.util.List;
@@ -15,17 +15,17 @@ public class PeopleServiceImpl implements PeopleService {
     private PeopleRepository PeopleRepository;
 
     @Override
-    public List<People> findAll() {
+    public List<Person> findAll() {
         return PeopleRepository.findAll();
     }
 
     @Override
-    public People findById(Long id) {
+    public Person findById(Long id) {
         return PeopleRepository.findById(id).orElse(null);
     }
 
     @Override
-    public People save(People People) {
+    public Person save(Person People) {
         return PeopleRepository.save(People);
     }
 
