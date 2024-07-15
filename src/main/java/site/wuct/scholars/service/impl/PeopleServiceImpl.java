@@ -22,7 +22,7 @@ public class PeopleServiceImpl implements PeopleService {
     @Autowired
     private InRepository InRepository;
     @Autowired
-    private LocationsRepository LocationsRepository;
+    private LocationsRepository locationsRepository;
 
     /**
      * {@inheritDoc}
@@ -61,7 +61,7 @@ public class PeopleServiceImpl implements PeopleService {
      */
     @SneakyThrows
     public List<Person> findPeopleByLocationId(Integer id) {
-        Optional<Location> locationOpt = LocationsRepository.findById(id);
+        Optional<Location> locationOpt = locationsRepository.findById(id);
         if (locationOpt.isPresent()) {
             return InRepository.findPeopleByLocationId(id);
         } else {

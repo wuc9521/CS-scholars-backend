@@ -1,10 +1,6 @@
 package site.wuct.scholars.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import org.springframework.web.bind.annotation.*;
 import site.wuct.scholars.model.Publication;
 import site.wuct.scholars.service.impl.PublicationsServiceImpl;
@@ -15,7 +11,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/api/pubs")
+@RequestMapping("/api/pub")
 @CrossOrigin
 public class PublicationsController {
     @Autowired
@@ -42,18 +38,29 @@ public class PublicationsController {
         return publication != null ? ResponseEntity.ok(publication) : ResponseEntity.notFound().build();
     }
 
+     /**
+     *  Get all publications by person id
+     * @param pid person id
+     * @return publications list
+     */
+    @GetMapping("/scholar/{pid}")
+    public ResponseEntity<List<Publication>> getPublicationsByPersonId(@PathVariable Integer pid) {
+        List<Publication> publications = publicationsService.findPublicationsByPersonId(pid);
+        return publications != null ? ResponseEntity.ok(publications) : ResponseEntity.notFound().build();
+    }
+
     /**
      * Create Publications
      * 
      * @param publication Publications
      * @return Publications
      */
-
     @PostMapping
     public Publication createPublications(@RequestBody Publication publication) {
         return publicationsService.save(publication);
     }
 
+    
     /**
      * Update Publications
      * 

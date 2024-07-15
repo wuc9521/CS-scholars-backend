@@ -1,6 +1,7 @@
 package site.wuct.scholars.repository;
 
 import site.wuct.scholars.model.Person;
+import site.wuct.scholars.model.Location;
 
 import java.util.List;
 
@@ -18,4 +19,12 @@ public interface InRepository extends JpaRepository<Person, Long> {
      */
     @Query(value = "SELECT P.* FROM people AS P JOIN \"in\" AS I ON P.pid = I.pid WHERE I.locid = :locid", nativeQuery = true)
     List<Person> findPeopleByLocationId(@Param("locid") Integer locid);
+
+    /**
+     * Get all Locations by person id
+     * @param pid person id
+     * @return Locations list
+     */
+    @Query(value = "SELECT L.* FROM locations AS L JOIN \"in\" AS I ON L.locid = I.locid WHERE I.pid = :pid", nativeQuery = true)
+    List<Location> findLocationsByPersonId(Integer pid);
 }

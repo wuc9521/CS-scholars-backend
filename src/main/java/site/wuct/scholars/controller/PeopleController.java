@@ -15,17 +15,16 @@ import java.util.List;
 public class PeopleController {
 
     @Autowired
-    private PeopleServiceImpl PeopleService;
+    private PeopleServiceImpl peopleService;
 
     /**
      * Get all People
      * 
      * @return People list
      */
-    @GetMapping
     public List<Person> getAllPeople() {
-        System.out.println(PeopleService.findAll());
-        return PeopleService.findAll();
+        System.out.println(peopleService.findAll());
+        return peopleService.findAll();
     }
 
     /**
@@ -36,7 +35,7 @@ public class PeopleController {
      */
     @GetMapping("/{id}")
     public ResponseEntity<Person> getPeopleById(@PathVariable Integer id) {
-        Person People = PeopleService.findById(id);
+        Person People = peopleService.findById(id);
         return People != null ? ResponseEntity.ok(People) : ResponseEntity.notFound().build();
     }
 
@@ -46,12 +45,14 @@ public class PeopleController {
      * @param id location id
      * @return People list
      */
-    @GetMapping("/by-location")
-    public ResponseEntity<List<Person>> getPeopleByLocationId(@RequestParam("locid") Integer locid) {
-        List<Person> people = PeopleService.findPeopleByLocationId(locid);
+    @GetMapping("/loc/{locid}")
+    public ResponseEntity<List<Person>> getPeopleByLocationId(@PathVariable Integer locid) {
+        List<Person> people = peopleService.findPeopleByLocationId(locid);
         System.out.println(1919);
         return people != null ? ResponseEntity.ok(people) : ResponseEntity.notFound().build();
     }
+
+   
 
     /**
      * Add a person to a location
@@ -62,7 +63,7 @@ public class PeopleController {
      */
     @PostMapping("/add-to-location")
     public ResponseEntity<String> addPersonToLocation(@RequestParam Integer personId, @RequestParam Integer locationId) {
-        boolean success = PeopleService.addPersonToLocation(personId, locationId);
+        boolean success = peopleService.addPersonToLocation(personId, locationId);
         if (success) {
             return ResponseEntity.ok("Person added to location successfully.");
         } else {
@@ -79,7 +80,7 @@ public class PeopleController {
     @Deprecated
     @PostMapping
     public Person createPeople(@RequestBody Person People) {
-        return PeopleService.save(People);
+        return peopleService.save(People);
     }
 
     /**
@@ -91,7 +92,7 @@ public class PeopleController {
     @Deprecated
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePeople(@PathVariable Integer id) {
-        PeopleService.deleteById(id);
+        peopleService.deleteById(id);
         return ResponseEntity.ok().build();
     }
 }
