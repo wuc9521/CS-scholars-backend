@@ -3,9 +3,15 @@ package site.wuct.scholars.service.impl;
 import site.wuct.scholars.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import lombok.SneakyThrows;
 import site.wuct.scholars.model.Person;
 import site.wuct.scholars.service.PeopleService;
 
+import java.util.Optional;
+import site.wuct.scholars.model.Location;
+
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -13,6 +19,10 @@ public class PeopleServiceImpl implements PeopleService {
 
     @Autowired
     private PeopleRepository PeopleRepository;
+    @Autowired
+    private InRepository InRepository;
+    @Autowired
+    private LocationsRepository LocationsRepository;
 
     /**
      * {@inheritDoc}
@@ -26,7 +36,7 @@ public class PeopleServiceImpl implements PeopleService {
      * {@inheritDoc}
      */
     @Override
-    public Person findById(Long id) {
+    public Person findById(Integer id) {
         return PeopleRepository.findById(id).orElse(null);
     }
 
@@ -42,7 +52,27 @@ public class PeopleServiceImpl implements PeopleService {
      * {@inheritDoc}
      */
     @Override
-    public void deleteById(Long id) {
+    public void deleteById(Integer id) {
         PeopleRepository.deleteById(id);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @SneakyThrows
+    public List<Person> findPeopleByLocationId(Integer id) {
+        Optional<Location> locationOpt = LocationsRepository.findById(id);
+        if (locationOpt.isPresent()) {
+            return InRepository.findPeopleByLocationId(id);
+        } else {
+            return Arrays.asList();
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public boolean addPersonToLocation(Integer personId, Integer locationId) {
+        return false;
     }
 }

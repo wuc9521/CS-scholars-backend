@@ -1,5 +1,13 @@
 # README
 
+## Data
+
+Our data is accessed [here](https://zenodo.org/records/10717537), and some explanations of attributes can be accessed [here](https://academictree.org/export.php)
+
+Our idea comes from the famous open source project [Academic Tree](https://academictree.org/)
+
+## Database
+
 ```sql
 /* tables in the database */
 
@@ -41,4 +49,13 @@ CREATE TABLE has (
     grantid INT,
     PRIMARY KEY (pid, grantid)
 );
+```
+
+## APIs
+
+### Person
+
+```shell
+/api/scholar            # get all scholars
+/api/scholar/<int:pid>  # get a scholar by pid
 ```

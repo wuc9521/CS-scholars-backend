@@ -8,5 +8,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/locations")
 @CrossOrigin
 public class LocationsController {
-    
+
 }

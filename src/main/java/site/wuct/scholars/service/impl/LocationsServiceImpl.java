@@ -6,7 +6,9 @@ import java.util.List;
 import site.wuct.scholars.repository.LocationsRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class LocationsServiceImpl implements LocationsService {
     @Autowired
     private LocationsRepository LocationsRepository;
@@ -23,7 +25,7 @@ public class LocationsServiceImpl implements LocationsService {
      * {@inheritDoc}
      */
     @Override
-    public Location findById(Long id) {
+    public Location findById(Integer id) {
         return LocationsRepository.findById(id).orElse(null);
     }
 
@@ -40,7 +42,7 @@ public class LocationsServiceImpl implements LocationsService {
      * {@inheritDoc}
      */
     @Override
-    public void deleteById(Long id) {
+    public void deleteById(Integer id) {
         LocationsRepository.deleteById(id);
     }
 

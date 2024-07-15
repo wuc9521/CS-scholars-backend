@@ -17,7 +17,7 @@ public interface LocationsService {
      * @param id location id
      * @return location
      */
-    Location findById(Long id);
+    Location findById(Integer id);
 
     /**
      * save location
@@ -32,5 +32,5 @@ public interface LocationsService {
      * 
      * @param id location id
      */
-    void deleteById(Long id);
+    void deleteById(Integer id);
 }

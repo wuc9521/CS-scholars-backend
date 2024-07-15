@@ -6,7 +6,10 @@ import site.wuct.scholars.service.PublicationsService;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+
+@Service
 public class PublicationsServiceImpl implements PublicationsService {
     @Autowired
     private PublicationsRepository PublicationsRepository;
