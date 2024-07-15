@@ -8,8 +8,6 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
-
-
 @RestController
 @RequestMapping("/api/pub")
 @CrossOrigin
@@ -19,6 +17,7 @@ public class PublicationsController {
 
     /**
      * Get all Publications
+     * 
      * @return Publications list
      */
     @GetMapping
@@ -38,8 +37,9 @@ public class PublicationsController {
         return publication != null ? ResponseEntity.ok(publication) : ResponseEntity.notFound().build();
     }
 
-     /**
-     *  Get all publications by person id
+    /**
+     * Get all publications by person id
+     * 
      * @param pid person id
      * @return publications list
      */
@@ -60,7 +60,6 @@ public class PublicationsController {
         return publicationsService.save(publication);
     }
 
-    
     /**
      * Update Publications
      * 

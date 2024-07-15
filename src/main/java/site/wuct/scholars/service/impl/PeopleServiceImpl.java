@@ -29,6 +29,7 @@ public class PeopleServiceImpl implements PeopleService {
      */
     @Override
     public List<Person> findAll() {
+        System.out.println("PeopleServiceImpl.findAll: " + PeopleRepository.findAll());
         return PeopleRepository.findAll();
     }
 
@@ -59,6 +60,7 @@ public class PeopleServiceImpl implements PeopleService {
     /**
      * {@inheritDoc}
      */
+    @Override
     @SneakyThrows
     public List<Person> findPeopleByLocationId(Integer id) {
         Optional<Location> locationOpt = locationsRepository.findById(id);

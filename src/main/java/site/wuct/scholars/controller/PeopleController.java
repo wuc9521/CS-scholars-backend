@@ -22,8 +22,9 @@ public class PeopleController {
      * 
      * @return People list
      */
+    @GetMapping
     public List<Person> getAllPeople() {
-        System.out.println(peopleService.findAll());
+        System.out.println(1111);
         return peopleService.findAll();
     }
 
@@ -48,11 +49,8 @@ public class PeopleController {
     @GetMapping("/loc/{locid}")
     public ResponseEntity<List<Person>> getPeopleByLocationId(@PathVariable Integer locid) {
         List<Person> people = peopleService.findPeopleByLocationId(locid);
-        System.out.println(1919);
         return people != null ? ResponseEntity.ok(people) : ResponseEntity.notFound().build();
     }
-
-   
 
     /**
      * Add a person to a location
@@ -62,7 +60,8 @@ public class PeopleController {
      * @return true if success
      */
     @PostMapping("/add-to-location")
-    public ResponseEntity<String> addPersonToLocation(@RequestParam Integer personId, @RequestParam Integer locationId) {
+    public ResponseEntity<String> addPersonToLocation(@RequestParam Integer personId,
+            @RequestParam Integer locationId) {
         boolean success = peopleService.addPersonToLocation(personId, locationId);
         if (success) {
             return ResponseEntity.ok("Person added to location successfully.");

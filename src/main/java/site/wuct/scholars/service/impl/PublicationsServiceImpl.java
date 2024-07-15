@@ -39,6 +39,7 @@ public class PublicationsServiceImpl implements PublicationsService {
     /**
      * {@inheritDoc}
      */
+    @Override
     @SneakyThrows
     public List<Publication> findPublicationsByPersonId(Integer id) {
         return publishRepository.findPublicationsByPersonId(id);

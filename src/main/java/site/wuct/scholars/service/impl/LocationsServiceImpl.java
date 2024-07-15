@@ -4,6 +4,7 @@ import site.wuct.scholars.service.LocationsService;
 import site.wuct.scholars.model.Location;
 import java.util.List;
 import site.wuct.scholars.repository.LocationsRepository;
+import site.wuct.scholars.repository.InRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,14 +12,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class LocationsServiceImpl implements LocationsService {
     @Autowired
-    private LocationsRepository LocationsRepository;
+    private LocationsRepository locationsRepository;
+    @Autowired
+    private InRepository inRepository;
 
     /**
      * {@inheritDoc}
      */
     @Override
     public List<Location> findAll() {
-        return LocationsRepository.findAll();
+        return locationsRepository.findAll();
     }
 
     /**
@@ -26,7 +29,7 @@ public class LocationsServiceImpl implements LocationsService {
      */
     @Override
     public Location findById(Integer id) {
-        return LocationsRepository.findById(id).orElse(null);
+        return locationsRepository.findById(id).orElse(null);
     }
 
     /**
@@ -34,7 +37,7 @@ public class LocationsServiceImpl implements LocationsService {
      */
     @Override
     public Location save(Location location) {
-        LocationsRepository.save(location);
+        locationsRepository.save(location);
         return location;
     }
 
@@ -43,7 +46,15 @@ public class LocationsServiceImpl implements LocationsService {
      */
     @Override
     public void deleteById(Integer id) {
-        LocationsRepository.deleteById(id);
+        locationsRepository.deleteById(id);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<Location> findLocationsByPersonId(Integer id) {
+        return inRepository.findLocationsByPersonId(id);
     }
 
 }

@@ -20,6 +20,14 @@ public interface LocationsService {
     Location findById(Integer id);
 
     /**
+     * find locations by person id
+     * 
+     * @param id person id
+     * @return locations list
+     */
+    List<Location> findLocationsByPersonId(Integer id);
+
+    /**
      * save location
      * 
      * @param location location
