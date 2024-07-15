@@ -20,6 +20,14 @@ public interface GrantsService {
     Grant findById(Long id);
 
     /**
+     * find all grants by person id
+     * 
+     * @param pid person id
+     * @return grants list
+     */
+    List<Grant> findGrantsByPersonId(Integer pid);
+
+    /**
      * save a grant to the database
      * 
      * @param grant the grant to save

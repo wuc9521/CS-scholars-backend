@@ -45,6 +45,12 @@ public class GrantsController {
         return grant != null ? ResponseEntity.ok(grant) : ResponseEntity.notFound().build();
     }
 
+    @GetMapping("/scholar/{pid}")
+    public ResponseEntity<List<Grant>> getGrantsByPersonId(@PathVariable Integer pid) {
+        List<Grant> grants = grantsService.findGrantsByPersonId(pid);
+        return grants != null ? ResponseEntity.ok(grants) : ResponseEntity.notFound().build();
+    }
+
     /**
      * Create grant
      * 
