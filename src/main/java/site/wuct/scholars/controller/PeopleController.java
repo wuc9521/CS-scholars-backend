@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/scholar")
@@ -17,81 +18,110 @@ public class PeopleController {
     @Autowired
     private PeopleServiceImpl peopleService;
 
-    /**
-     * Get all People
-     * 
-     * @return People list
-     */
-    @GetMapping
-    public List<Person> getAllPeople() {
-        System.out.println(1111);
-        return peopleService.findAll();
+    // /**
+    //  * Get all People
+    //  * 
+    //  * @return People list
+    //  */
+    // @GetMapping
+    // public List<Person> getAllPeople() {
+    //     System.out.println(1111);
+    //     return peopleService.findAll();
+    // }
+
+    // /**
+    //  * Get People by id
+    //  * 
+    //  * @param id People id
+    //  * @return People
+    //  */
+    // @GetMapping("/{id}")
+    // public ResponseEntity<Person> getPeopleById(@PathVariable Integer id) {
+    //     Person People = peopleService.findById(id);
+    //     return People != null ? ResponseEntity.ok(People) : ResponseEntity.notFound().build();
+    // }
+
+    // /**
+    //  * Get People by location id
+    //  * 
+    //  * @param id location id
+    //  * @return People list
+    //  */
+    // @GetMapping("/loc/{locid}")
+    // public ResponseEntity<List<Person>> getPeopleByLocationId(@PathVariable Integer locid) {
+    //     List<Person> people = peopleService.findPeopleByLocationId(locid);
+    //     return people != null ? ResponseEntity.ok(people) : ResponseEntity.notFound().build();
+    // }
+
+    // /**
+    //  * Add a person to a location
+    //  * 
+    //  * @param personId   given person id
+    //  * @param locationId given location id
+    //  * @return true if success
+    //  */
+    // @PostMapping("/add-to-location")
+    // public ResponseEntity<String> addPersonToLocation(@RequestParam Integer personId,
+    //         @RequestParam Integer locationId) {
+    //     boolean success = peopleService.addPersonToLocation(personId, locationId);
+    //     if (success) {
+    //         return ResponseEntity.ok("Person added to location successfully.");
+    //     } else {
+    //         return ResponseEntity.badRequest().body("Person or Location not found.");
+    //     }
+    // }
+
+    // /**
+    //  * Create People
+    //  * 
+    //  * @param People People
+    //  * @return People
+    //  */
+    // @Deprecated
+    // @PostMapping
+    // public Person createPeople(@RequestBody Person People) {
+    //     return peopleService.save(People);
+    // }
+
+    // /**
+    //  * Update People
+    //  * 
+    //  * @param id People id
+    //  * @return People
+    //  */
+    // @Deprecated
+    // @DeleteMapping("/{id}")
+    // public ResponseEntity<Void> deletePeople(@PathVariable Integer id) {
+    //     peopleService.deleteById(id);
+    //     return ResponseEntity.ok().build();
+    // }
+
+    @GetMapping("/publication-count")
+    public ResponseEntity<List<Object[]>> getPeopleByPublicationCount(
+            @RequestParam String location,
+            @RequestParam String major) {
+        return ResponseEntity.ok(peopleService.getPeopleByPublicationCount(location, major));
     }
 
-    /**
-     * Get People by id
-     * 
-     * @param id People id
-     * @return People
-     */
-    @GetMapping("/{id}")
-    public ResponseEntity<Person> getPeopleById(@PathVariable Integer id) {
-        Person People = peopleService.findById(id);
-        return People != null ? ResponseEntity.ok(People) : ResponseEntity.notFound().build();
+    @GetMapping("/hindex")
+    public ResponseEntity<List<Object[]>> getPeopleByHIndex(
+            @RequestParam String location,
+            @RequestParam String major) {
+        System.out.println("location: " + location + ", major: " + major);
+        return ResponseEntity.ok(peopleService.getPeopleByHIndex(location, major));
     }
 
-    /**
-     * Get People by location id
-     * 
-     * @param id location id
-     * @return People list
-     */
-    @GetMapping("/loc/{locid}")
-    public ResponseEntity<List<Person>> getPeopleByLocationId(@PathVariable Integer locid) {
-        List<Person> people = peopleService.findPeopleByLocationId(locid);
-        return people != null ? ResponseEntity.ok(people) : ResponseEntity.notFound().build();
+    @GetMapping("/publications-no-grants")
+    public ResponseEntity<List<Object[]>> getPeopleWithPublicationsNoGrants(
+            @RequestParam String location,
+            @RequestParam String major) {
+        return ResponseEntity.ok(peopleService.getPeopleWithPublicationsNoGrants(location, major));
     }
 
-    /**
-     * Add a person to a location
-     * 
-     * @param personId   given person id
-     * @param locationId given location id
-     * @return true if success
-     */
-    @PostMapping("/add-to-location")
-    public ResponseEntity<String> addPersonToLocation(@RequestParam Integer personId,
-            @RequestParam Integer locationId) {
-        boolean success = peopleService.addPersonToLocation(personId, locationId);
-        if (success) {
-            return ResponseEntity.ok("Person added to location successfully.");
-        } else {
-            return ResponseEntity.badRequest().body("Person or Location not found.");
-        }
-    }
-
-    /**
-     * Create People
-     * 
-     * @param People People
-     * @return People
-     */
-    @Deprecated
-    @PostMapping
-    public Person createPeople(@RequestBody Person People) {
-        return peopleService.save(People);
-    }
-
-    /**
-     * Update People
-     * 
-     * @param id People id
-     * @return People
-     */
-    @Deprecated
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePeople(@PathVariable Integer id) {
-        peopleService.deleteById(id);
-        return ResponseEntity.ok().build();
+    @GetMapping("/{personId}/profile")
+    public ResponseEntity<Map<String, Object>> getPersonProfile(@PathVariable Long personId) {
+        System.out.println("personId: " + personId);
+        Map<String, Object> profile = peopleService.getPersonProfile(personId);
+        return ResponseEntity.ok(profile);
     }
 }

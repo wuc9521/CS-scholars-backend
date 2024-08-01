@@ -44,5 +44,29 @@ public interface PeopleService {
      * @return true if success
      */
     boolean addPersonToLocation(Integer personId, Integer locationId);
+
+    /**
+     * Get people by publication count in a location and major
+     * @param locName
+     * @param major
+     * @return
+     */
+    List<Object[]> getPeopleByPublicationCount(String locName, String major);
+    
+    /**
+     * Get people by h-index in a location and major
+     * @param locName
+     * @param major
+     * @return
+     */
+    List<Object[]> getPeopleByHIndex(String locName, String major);
+    
+    /**
+     * Get people with publications but no grants in a location and major
+     * @param locName
+     * @param major
+     * @return
+     */
+    List<Object[]> getPeopleWithPublicationsNoGrants(String locName, String major);
 }
 

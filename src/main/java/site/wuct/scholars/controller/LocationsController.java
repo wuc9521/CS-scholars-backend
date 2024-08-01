@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 
 @RestController
@@ -75,4 +76,24 @@ public class LocationsController {
         return locations != null ? ResponseEntity.ok(locations) : ResponseEntity.notFound().build();
     }
 
+    @GetMapping("/by-people-count")
+    public ResponseEntity<List<Object[]>> getLocationsByMajorCount(@RequestParam String major) {
+        return ResponseEntity.ok(locationsService.getLocationsByMajorCount(major));
+    }
+
+    @GetMapping("/by-grant-count")
+    public ResponseEntity<List<Object[]>> getLocationsByGrantCount(@RequestParam String major) {
+        return ResponseEntity.ok(locationsService.getLocationsByGrantCount(major));
+    }
+
+    @GetMapping("/by-max-hindex")
+    public ResponseEntity<List<Object[]>> getLocationsByMaxHIndex(@RequestParam String major) {
+        return ResponseEntity.ok(locationsService.getLocationsByMaxHIndex(major));
+    }
+
+    @GetMapping("/{id}/profile")
+    public ResponseEntity<Map<String, Object>> getLocationProfile(@PathVariable Integer id) {
+        Map<String, Object> profile = locationsService.getLocationProfile(id);
+        return profile != null ? ResponseEntity.ok(profile) : ResponseEntity.notFound().build();
+    }
 }
