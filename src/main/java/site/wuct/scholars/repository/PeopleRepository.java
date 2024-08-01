@@ -12,7 +12,7 @@ import org.springframework.data.repository.query.Param;
 public interface PeopleRepository extends JpaRepository<Person, Integer> {
 
   @Query(nativeQuery = true, value = "SELECT p.pid, p.name, p.major, p.hindex, " +
-      "l.loc_name AS location, l.locid as location_id " +
+      "l.loc_name AS location, l.locid as location_id, " +
       "(SELECT COUNT(*) FROM Publish pub WHERE pub.pid = p.pid) AS publication_count, " +
       "(SELECT COUNT(*) FROM Has o WHERE o.pid = p.pid) AS grant_count " +
       "FROM People p " +
