@@ -2,6 +2,8 @@ package site.wuct.scholars.service.impl;
 
 import site.wuct.scholars.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +28,8 @@ public class PeopleServiceImpl implements PeopleService {
     private InRepository InRepository;
     @Autowired
     private LocationsRepository locationsRepository;
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     /**
      * {@inheritDoc}
@@ -108,5 +112,68 @@ public class PeopleServiceImpl implements PeopleService {
         profileCopy.put("grants", grants);
 
         return profileCopy;
+    }
+
+    @Transactional
+    public void addNewPerson(String name, String major, int hindex, String location) {
+        SimpleJdbcCall jdbcCall = new SimpleJdbcCall(jdbcTemplate)
+            .withFunctionName("AddNewPerson");
+
+        Map<String, Object> inParams = new HashMap<>();
+        inParams.put("p_name", name);
+        inParams.put("p_major", major);
+        inParams.put("p_hindex", hindex);
+        inParams.put("p_location", location);
+
+        jdbcCall.execute(inParams);
+    }
+
+    @Transactional
+    public void updateHIndex(String name, int newHindex) {
+        SimpleJdbcCall jdbcCall = new SimpleJdbcCall(jdbcTemplate)
+            .withFunctionName("UpdateHIndex");
+
+        Map<String, Object> inParams = new HashMap<>();
+        inParams.put("p_name", name);
+        inParams.put("p_new_hindex", newHindex);
+
+        jdbcCall.execute(inParams);
+    }
+
+    @Transactional
+    public void addPublicationAndAssociate(String pmid, String doi, String authorName) {
+        SimpleJdbcCall jdbcCall = new SimpleJdbcCall(jdbcTemplate)
+            .withFunctionName("AddPublicationAndAssociate");
+
+        Map<String, Object> inParams = new HashMap<>();
+        inParams.put("p_pmid", pmid);
+        inParams.put("p_doi", doi);
+        inParams.put("p_author_name", authorName);
+
+        jdbcCall.execute(inParams);
+    }
+
+    @Transactional
+    public void assignGrantToPerson(java.sql.Date budgetStart, String personName) {
+        SimpleJdbcCall jdbcCall = new SimpleJdbcCall(jdbcTemplate)
+            .withFunctionName("AssignGrantToPerson");
+
+        Map<String, Object> inParams = new HashMap<>();
+        inParams.put("p_budget_start", budgetStart);
+        inParams.put("p_person_name", personName);
+
+        jdbcCall.execute(inParams);
+    }
+
+    @Transactional
+    public void changePersonLocation(String personName, String locName) {
+        SimpleJdbcCall jdbcCall = new SimpleJdbcCall(jdbcTemplate)
+            .withFunctionName("ChangePersonLocation");
+
+        Map<String, Object> inParams = new HashMap<>();
+        inParams.put("p_person_name", personName);
+        inParams.put("p_loc_name", locName);
+
+        jdbcCall.execute(inParams);
     }
 }

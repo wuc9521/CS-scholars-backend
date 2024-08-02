@@ -4,9 +4,11 @@ import site.wuct.scholars.model.Person;
 import site.wuct.scholars.service.impl.PeopleServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -123,5 +125,39 @@ public class PeopleController {
         System.out.println("personId: " + personId);
         Map<String, Object> profile = peopleService.getPersonProfile(personId);
         return ResponseEntity.ok(profile);
+    }
+
+    @PostMapping("/add")
+    public ResponseEntity<String> addNewPerson(
+            @RequestParam String name,
+            @RequestParam String major,
+            @RequestParam int hindex,
+            @RequestParam String location) {
+        peopleService.addNewPerson(name, major, hindex, location);
+        return ResponseEntity.ok("Person added successfully");
+    }
+
+    @PutMapping("/update-hindex")
+    public ResponseEntity<String> updateHIndex(@RequestParam String name, @RequestParam int newHindex) {
+        peopleService.updateHIndex(name, newHindex);
+        return ResponseEntity.ok("H-index updated successfully");
+    }
+
+    @PostMapping("/add-publication")
+    public ResponseEntity<String> addPublicationAndAssociate(@RequestParam String pmid, @RequestParam String doi, @RequestParam String authorName) {
+        peopleService.addPublicationAndAssociate(pmid, doi, authorName);
+        return ResponseEntity.ok("Publication added and associated successfully");
+    }
+
+    @PostMapping("/assign-grant")
+    public ResponseEntity<String> assignGrantToPerson(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date budgetStart, @RequestParam String personName) {
+        peopleService.assignGrantToPerson(new java.sql.Date(budgetStart.getTime()), personName);
+        return ResponseEntity.ok("Grant assigned successfully");
+    }
+
+    @PutMapping("/change-location")
+    public ResponseEntity<String> changePersonLocation(@RequestParam String personName, @RequestParam String locName) {
+        peopleService.changePersonLocation(personName, locName);
+        return ResponseEntity.ok("Person's location changed successfully");
     }
 }
