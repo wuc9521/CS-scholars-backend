@@ -17,6 +17,9 @@ public class PerformanceTest {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    /**
+     * Test the performance of a simple query
+     */
     @Test
     public void testLargeDatasetQuery() {
         long startTime = System.currentTimeMillis();
@@ -28,6 +31,10 @@ public class PerformanceTest {
         assertTrue(duration < 5000, "Query took too long");
     }
 
+    /**
+     * Test the performance of concurrent connections
+     * @throws InterruptedException if the thread is interrupted
+     */
     @Test
     public void testConcurrentConnections() throws InterruptedException {
         int numThreads = 10;
@@ -46,6 +53,9 @@ public class PerformanceTest {
         assertTrue(duration < 10000, "Concurrent queries took too long");
     }
 
+    /**
+     * Test the performance of a complex join operation
+     */
     @Test
     public void testComplexJoinOperation() {
         long startTime = System.currentTimeMillis();
@@ -67,6 +77,9 @@ public class PerformanceTest {
         assertTrue(duration < 7000, "Complex join took too long");
     }
 
+    /**
+     * Test the impact of indexing on query performance
+     */
     @Test
     public void testIndexImpact() {
         // Assuming 'name' column is not indexed
@@ -89,6 +102,10 @@ public class PerformanceTest {
         jdbcTemplate.execute("DROP INDEX IF EXISTS idx_people_name");
     }
 
+    /**
+     * Test the performance of a sustained load
+     * @throws InterruptedException if the thread is interrupted
+     */
     @Test
     public void testSustainedLoad() throws InterruptedException {
         ExecutorService executorService = Executors.newFixedThreadPool(5);
