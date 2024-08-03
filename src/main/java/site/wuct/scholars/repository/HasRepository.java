@@ -16,5 +16,4 @@ public interface HasRepository extends JpaRepository<Grant, Long> {
      */
     @Query(value = "SELECT \"grants\".* FROM grants JOIN \"has\" ON \"grants\".grantid = \"has\".grantid WHERE \"has\".pid = :pid", nativeQuery = true)
     public List<Grant> findGrantsByPersonId(Integer pid);
-
 }
