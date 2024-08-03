@@ -36,7 +36,6 @@ public class PeopleServiceImpl implements PeopleService {
      */
     @Override
     public List<Person> findAll() {
-        System.out.println("PeopleServiceImpl.findAll: " + PeopleRepository.findAll());
         return PeopleRepository.findAll();
     }
 
